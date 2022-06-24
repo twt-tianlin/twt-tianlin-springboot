@@ -6,4 +6,8 @@
         select name from tb_role where id =(select roleid from tb_user_role where userid = #{id})
     </select>
 
+    <update id="setUserRole">
+        insert into tb_user_role (userid,roleid) values (#{id},1)
+    </update>
+
 </mapper>

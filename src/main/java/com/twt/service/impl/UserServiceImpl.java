@@ -30,6 +30,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setEmail(registerDto.getEmail());
         user.setPassword(SecureUtil.md5(registerDto.getPassword()));
         userMapper.insert(user);
+        // 注册完之后是user角色
+        userMapper.setUserRole(user.getId());
         return user;
     }
 

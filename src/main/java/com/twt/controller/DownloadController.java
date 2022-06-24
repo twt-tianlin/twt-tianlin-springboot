@@ -1,10 +1,7 @@
 package com.twt.controller;
 
-
-import com.twt.dto.DownloadFileDto;
 import com.twt.service.DownloadService;
-import com.twt.shiro.AccountProfile;
-import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
@@ -12,16 +9,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 
 
 @RequestMapping("/download")
+@RequiresRoles("admin")
 @RestController
 public class DownloadController {
 

@@ -8,13 +8,11 @@ import com.twt.service.NoticeService;
 import com.twt.utils.Result;
 import com.twt.vo.HomeNoticeVO;
 import com.twt.vo.NoticeVO;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +20,7 @@ import java.util.List;
  *  前端控制器
  * </p>
  *
- * @author sxd
+ * @author 史熹东
  * @since 2022-06-20
  */
 @RestController
@@ -39,6 +37,7 @@ public class NoticeController {
     }
 
     @PostMapping
+    @RequiresRoles("admin")
     public Result publishNotice(@RequestBody NoticeDto noticeDto){
         Notice notice = new Notice();
         BeanUtil.copyProperties(noticeDto,notice);
