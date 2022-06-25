@@ -12,4 +12,10 @@ public class ConfirmDto {
     private String[] bedNeed;
     private String wayToJin;
     private String station;
+
+    private Integer isNeedPickUp;
+    private String timeToJin;
+    private String trainNumber;
+    private Integer accompanyNumber;
+
 }

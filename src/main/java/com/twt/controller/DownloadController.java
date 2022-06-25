@@ -99,4 +99,32 @@ public class DownloadController {
 
     }
 
+    @GetMapping("/notice/attachment")
+    public void getNoticeAttachment(@RequestParam String filePath, HttpServletResponse response) throws Exception {
+
+//        文件后缀
+        String suffixName = filePath.substring(filePath.lastIndexOf("."));
+
+//        服务器文件
+        FileInputStream in = new FileInputStream(filePath);
+
+
+        //设置文件ContentType类型
+        response.setContentType("notice/" + suffixName);
+
+        //设置文件头：最后一个参数是设置下载文件名
+        response.setHeader("Content-Disposition", "attachment;fileName="+"attachment"+suffixName);
+        ServletOutputStream out = response.getOutputStream();
+
+        // 读取文件流
+        int len = 0;
+        byte[] buffer = new byte[1024 * 10];
+        while ((len = in.read(buffer)) != -1) {
+            out.write(buffer, 0, len);
+        }
+        out.flush();
+
+    }
+
+
 }

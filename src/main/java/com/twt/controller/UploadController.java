@@ -20,7 +20,7 @@ public class UploadController {
 
 
     @PostMapping("/photo")
-    @RequiresRoles("user")
+//    @RequiresRoles("user")
     private String uploadPhoto(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         //        创建目录
         SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy");
@@ -44,7 +44,7 @@ public class UploadController {
 
 
     @PostMapping("file")
-    @RequiresRoles("user")
+//    @RequiresRoles("user")
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile) throws Exception{
 //        创建目录
         SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy");
@@ -68,7 +68,7 @@ public class UploadController {
 
 
     @PostMapping("notice")
-    @RequiresRoles("admin")
+//    @RequiresRoles("admin")
     public String uploadNoticeAttachment(@RequestParam("file") MultipartFile multipartFile) throws Exception{
 //        创建目录
         SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy");

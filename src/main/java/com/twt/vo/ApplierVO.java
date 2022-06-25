@@ -1,8 +1,9 @@
 package com.twt.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class ApplierVO {
@@ -11,11 +12,11 @@ public class ApplierVO {
 
     private String name;
 
-    private Integer gender;
+    private String gender;
 
     private String identity;
 
-    private Integer partyWill;
+    private String partyWill;
 
     private String major;
 
@@ -59,8 +60,9 @@ public class ApplierVO {
 
     private Integer year;
 
-    private Integer admit;
+    private String admit;
 
-    private Date createdAt;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDateTime createdAt;
 
 }

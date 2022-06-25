@@ -108,6 +108,8 @@ public class DownloadService {
             cell.setCellValue(apply.getHobby());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
             cell.setCellValue(apply.getIntroduction());
+            rowIndex++;
+            rowCursor=0;
         }
 
 
@@ -187,6 +189,8 @@ public class DownloadService {
             cell.setCellValue(confirm.getStation());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
             cell.setCellValue(confirm.getAccompanyNumber());
+            rowIndex++;
+            rowCursor=0;
         }
 
 

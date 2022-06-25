@@ -1,5 +1,6 @@
 package com.twt.handler;
 
+import com.twt.ex.UserException;
 import com.twt.utils.Result;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +14,14 @@ public class AllExceptionHandler {
     public Result doWithoutPermission(Exception e) {
         e.printStackTrace();
         return Result.fail(403, "没有权限访问", null);
+    }
+
+
+    // 捕获账号相关异常
+    @ExceptionHandler(UserException.class)
+    public Result doUserException(Exception e) {
+        e.printStackTrace();
+        return Result.fail(404, e.getMessage(), null);
     }
 
 

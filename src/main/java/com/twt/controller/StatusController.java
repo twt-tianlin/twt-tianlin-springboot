@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/status")
-@RequiresRoles("admin")
+
 public class StatusController {
 
     @Autowired
@@ -34,6 +34,7 @@ public class StatusController {
     }
 
     @PutMapping("openApplySystem")
+    @RequiresRoles("admin")
     public Result openApplySystem(){
         Status status = statusService.getOne(new LambdaQueryWrapper<>());
         status.setApply(1);
@@ -42,6 +43,7 @@ public class StatusController {
     }
 
     @PutMapping("closeApplySystem")
+    @RequiresRoles("admin")
     public Result closeApplySystem(){
         Status status = statusService.getOne(new LambdaQueryWrapper<>());
         status.setApply(0);
@@ -50,6 +52,7 @@ public class StatusController {
     }
 
     @PutMapping("openConfirmSystem")
+    @RequiresRoles("admin")
     public Result openConfirmSystem(){
         Status status = statusService.getOne(new LambdaQueryWrapper<>());
         status.setConfirm(1);
@@ -58,6 +61,7 @@ public class StatusController {
     }
 
     @PutMapping("closeConfirmSystem")
+    @RequiresRoles("admin")
     public Result closeConfirmSystem(){
         Status status = statusService.getOne(new LambdaQueryWrapper<>());
         status.setConfirm(0);
