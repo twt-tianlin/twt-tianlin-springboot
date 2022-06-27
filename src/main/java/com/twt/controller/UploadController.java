@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/upload")
+@RequestMapping("/api/upload")
 public class UploadController {
     @Autowired
     UploadService uploadService;

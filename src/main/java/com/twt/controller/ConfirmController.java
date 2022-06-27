@@ -25,7 +25,7 @@ import java.util.Date;
  * @since 2022-06-20
  */
 @RestController
-@RequestMapping("/confirm")
+@RequestMapping("/api/confirm")
 public class ConfirmController {
 
     @Autowired

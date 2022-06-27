@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 
 
 
-@RequestMapping("/download")
+@RequestMapping("/api/download")
 @RequiresRoles("admin")
 @RestController
 public class DownloadController {

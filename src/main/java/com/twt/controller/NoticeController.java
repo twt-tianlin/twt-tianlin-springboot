@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2022-06-20
  */
 @RestController
-@RequestMapping("/notice")
+@RequestMapping("/api/notice")
 public class NoticeController {
 
     @Autowired

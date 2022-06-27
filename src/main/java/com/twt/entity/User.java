@@ -32,8 +32,6 @@ public class User implements Serializable {
 
     private String password;
 
-    private String rememberToken;
-
     private Date createdAt;
 
     private Date updatedAt;

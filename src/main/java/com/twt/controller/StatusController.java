@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-06-20
  */
 @RestController
-@RequestMapping("/status")
+@RequestMapping("/api/status")
 
 public class StatusController {
 

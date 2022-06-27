@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2022-06-20
  */
 @RestController
-@RequestMapping("/apply")
+@RequestMapping("/api/apply")
 public class ApplyController {
 
     @Autowired

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2022-06-20
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
