@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -27,10 +28,16 @@ public class DownloadService {
 
     public void exportApplyInfo(HttpServletResponse response) throws IOException {
         //文件名
-        String fileName = "applyInfo";
+        // String fileName = "applyInfo";
 
         //配置请求头
         ServletOutputStream outputStream = response.getOutputStream();
+
+
+        response.setContentType("application/x-download");
+        String fileName = URLEncoder.encode("学生申请信息", "UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         // 组装附件名称和格式
         response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xlsx");
 
@@ -129,11 +136,15 @@ public class DownloadService {
     }
 
     public void exportConfirmInfo(HttpServletResponse response) throws IOException {
-        //文件名
-        String fileName = "confirmInfo";
+
 
         //配置请求头
         ServletOutputStream outputStream = response.getOutputStream();
+
+
+        response.setContentType("application/x-download");
+        String fileName = URLEncoder.encode("学生确认信息", "UTF-8");
+        response.setCharacterEncoding("UTF-8");
         // 组装附件名称和格式
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName + ".xlsx");
         response.setHeader("Content-Type","application/octet-stream");
@@ -215,7 +226,11 @@ public class DownloadService {
         ZipUtil zipUtil = new ZipUtil();
         zipUtil.toZip("file", response.getOutputStream(), true);
 
+        response.setContentType("application/x-download");
+        String fileName = URLEncoder.encode("学生作证材料", "UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         // 组装附件名称和格式
-        response.setHeader("Content-disposition", "attachment; filename=" + "attachments" + ".zip");
+        response.setHeader("Content-disposition", "filename=" + fileName + "123.xlsx");
     }
 }

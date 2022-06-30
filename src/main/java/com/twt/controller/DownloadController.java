@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
-
+import java.net.URLEncoder;
 
 
 @RequestMapping("/api/download")
@@ -24,6 +24,7 @@ public class DownloadController {
     DownloadService downloadService;
 
     @GetMapping("applyInfo")
+    // 导出报名信息
     public String exportApplyInfo(HttpServletResponse response) {
         try {
             downloadService.exportApplyInfo(response);
@@ -34,6 +35,7 @@ public class DownloadController {
     }
 
     @GetMapping("confirmInfo")
+    // 导出确认信息
     public String exportConfirmInfo(HttpServletResponse response) {
         try {
             downloadService.exportConfirmInfo(response);
@@ -44,6 +46,7 @@ public class DownloadController {
     }
 
     @GetMapping("attachment")
+    // 导出学生作证材料
     public String exportAttachment(HttpServletResponse response) {
         try {
             downloadService.exportAttachment(response);
@@ -58,11 +61,12 @@ public class DownloadController {
     @GetMapping("/applier/file")
     public ResponseEntity<InputStreamResource> downloadApplierFile(@RequestParam String filePath) throws Exception {
 
-//        文件后缀
+        // 文件后缀
         String suffixName = filePath.substring(filePath.lastIndexOf("."));
 
         FileSystemResource fileSystemResource = new FileSystemResource(filePath);
         HttpHeaders headers = new HttpHeaders();
+
         headers.add("Content-Disposition", "attachment;filename=" + "applier" + suffixName);
         return ResponseEntity.ok()
                 .headers(headers)
@@ -111,6 +115,11 @@ public class DownloadController {
 
         //设置文件ContentType类型
         response.setContentType("notice/" + suffixName);
+
+        response.setContentType("application/x-download");
+
+        String fileName = URLEncoder.encode("浏览器要显示的文件名", "UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         //设置文件头：最后一个参数是设置下载文件名
         response.setHeader("Content-Disposition", "attachment;fileName="+"attachment"+suffixName);
