@@ -11,6 +11,6 @@ public class NoticeVO {
     private String title;
     private String content;
     private String filePath;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime updatedAt;
 }

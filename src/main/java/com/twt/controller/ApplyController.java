@@ -96,6 +96,9 @@ public class ApplyController {
     @RequiresAuthentication
     public Result getUserAdmit(@RequestParam Integer uid){
         Apply applier = applyService.getOne(new LambdaQueryWrapper<Apply>().eq(Apply::getUid, uid));
+        if (applier==null){
+            return Result.success("未录取");
+        }
         if (applier.getAdmit()==1){
             return Result.success("已录取");
         }else{

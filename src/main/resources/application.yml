@@ -5,7 +5,7 @@ spring:
       max-request-size: 15MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/com_twt_tlb?serverTimezone=UTC
+    url: jdbc:mysql://8.141.161.245:3306/com_twt_tlb?serverTimezone=UTC
     username: root
     password: root
 

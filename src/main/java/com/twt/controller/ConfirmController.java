@@ -36,10 +36,14 @@ public class ConfirmController {
     public Result commitConfirm(@RequestBody ConfirmDto confirmDto){
         Confirm confirm = new Confirm();
         BeanUtil.copyProperties(confirmDto,confirm);
-        confirm.setBedNeed(StrUtil.strip(confirmDto.getBedNeed().toString(),"[]"));
-        confirm.setCreatedAt(LocalDateTime.now());
-        confirm.setUpdatedAt(LocalDateTime.now());
-        confirm.setYear(new Date().getYear());
+
+        if (confirmDto.getIsJoin()==1){
+            confirm.setBedNeed(StrUtil.strip(confirmDto.getBedNeed().toString(),"[]"));
+            confirm.setCreatedAt(LocalDateTime.now());
+            confirm.setUpdatedAt(LocalDateTime.now());
+            confirm.setYear(new Date().getYear());
+        }
+
         confirmService.save(confirm);
         return Result.success(null);
     }

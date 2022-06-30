@@ -12,7 +12,7 @@
 
     <groupId>com.twt</groupId>
     <artifactId>twt-tianlin-springboot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>v1.0.0</version>
     <name>twt-tianlin-springboot</name>
     <description>twt tlb backend</description>
 
@@ -74,6 +74,13 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.2</version>
+        </dependency>
+
+<!--        processor-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

@@ -54,12 +54,24 @@ public class NoticeController {
         return Result.success(copyList(list));
     }
 
+//    @PutMapping("{id}")
+//    public Result updateNotice(@PathVariable("id") Integer id){
+//        noticeService.updateById()
+//    }
+
     @GetMapping("/detail/{id}")
     public Result getNoticesAll(@PathVariable("id") Integer id){
         Notice notice = noticeService.getById(id);
         NoticeVO noticeVO = new NoticeVO();
         BeanUtil.copyProperties(notice,noticeVO);
         return Result.success(noticeVO);
+    }
+
+    @DeleteMapping("{id}")
+    @RequiresRoles("admin")
+    public Result deleteNotice(@PathVariable("id") Integer id){
+        noticeService.removeById(id);
+        return Result.success(null);
     }
 
     private List<NoticeVO> copyList(List<Notice> notices) {
