@@ -35,12 +35,22 @@ public class ApplyServiceImpl extends ServiceImpl<ApplyMapper, Apply> implements
 
     @Override
     public Result commitApply(ApplyDto applyDto) {
+        // 新建Apply对象 并拷贝属性
         Apply apply = new Apply();
         BeanUtil.copyProperties(applyDto,apply);
-        apply.setCreatedAt(LocalDateTime.now());
         apply.setUpdatedAt(LocalDateTime.now());
-        apply.setYear(new Date().getYear());
-        return Result.success(applyMapper.insert(apply));
+        apply.setYear(LocalDateTime.now().getYear());
+
+        Apply oldApply = applyMapper.selectOne(new LambdaQueryWrapper<Apply>().eq(Apply::getUid, apply.getUid()));
+        if (oldApply!=null){
+            applyMapper.update(apply,new LambdaQueryWrapper<Apply>().eq(Apply::getUid,apply.getUid()));
+        }else {
+            apply.setCreatedAt(LocalDateTime.now());
+            applyMapper.insert(apply);
+        }
+
+
+        return Result.success("操作成功");
     }
 
     @Override
