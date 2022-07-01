@@ -2,6 +2,7 @@ package com.twt.handler;
 
 import com.twt.ex.UserException;
 import com.twt.utils.Result;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,6 +25,12 @@ public class AllExceptionHandler {
         return Result.fail(404, e.getMessage(), null);
     }
 
+    // token过期
+    @ExceptionHandler(ExpiredCredentialsException.class)
+    public Result doExpiredCredentialException(Exception e) {
+        e.printStackTrace();
+        return Result.fail(405, e.getMessage(), null);
+    }
 
     // 捕获其余异常
     @ExceptionHandler(Exception.class)
