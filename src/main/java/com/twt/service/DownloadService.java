@@ -226,11 +226,5 @@ public class DownloadService {
         ZipUtil zipUtil = new ZipUtil();
         zipUtil.toZip("file", response.getOutputStream(), true);
 
-        response.setContentType("application/x-download");
-        String fileName = URLEncoder.encode("学生作证材料", "UTF-8");
-        response.setCharacterEncoding("UTF-8");
-
-        // 组装附件名称和格式
-        response.setHeader("Content-disposition", "filename=" + fileName + "123.xlsx");
     }
 }

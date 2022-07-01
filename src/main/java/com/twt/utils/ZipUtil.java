@@ -42,42 +42,7 @@ public class ZipUtil {
     }
 
 
-    /**
-     * 多个文件打成一个压缩包
-     *
-     * @param srcFiles 需要压缩的文件列表
-     * @param out      压缩文件输出流
-     * @throws RuntimeException 压缩失败会抛出运行时异常
-     */
-    public static void toZip(List<File> srcFiles, OutputStream out) throws RuntimeException {
 
-        ZipOutputStream zos = null;
-        try {
-            zos = new ZipOutputStream(out);
-            for (File srcFile : srcFiles) {
-                byte[] buf = new byte[BUFFER_SIZE];
-                zos.putNextEntry(new ZipEntry(srcFile.getName()));
-                int len;
-                FileInputStream in = new FileInputStream(srcFile);
-                while ((len = in.read(buf)) != -1) {
-                    zos.write(buf, 0, len);
-                }
-                zos.closeEntry();
-                in.close();
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("zip error from ZipUtils", e);
-        } finally {
-            if (zos != null) {
-                try {
-                    zos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     /**
      * 递归压缩
@@ -128,20 +93,5 @@ public class ZipUtil {
                 }
             }
         }
-    }
-
-    //测试方法
-    public static void main(String[] args) throws Exception {
-        //测试压缩方法1  将磁盘目录打包，并将压缩包写到磁盘
-        FileOutputStream fos = new FileOutputStream(new File("file/zip"));
-        ZipUtil.toZip("file", fos, true);
-        /** 测试压缩方法2  */
-        /*
-        List<File> fileList = new ArrayList<>();
-        fileList.add(new File("D:/Java/jdk1.7.0_45_64bit/bin/jar.exe"));
-        fileList.add(new File("D:/Java/jdk1.7.0_45_64bit/bin/java.exe"));
-        FileOutputStream fos2 = new FileOutputStream(new File("c:/mytest02.zip"));
-        ZipUtils.toZip(fileList, fos2);*/
-
     }
 }

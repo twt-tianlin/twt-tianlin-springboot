@@ -16,7 +16,7 @@ import java.net.URLEncoder;
 
 
 @RequestMapping("/api/download")
-@RequiresRoles("admin")
+//@RequiresRoles("admin")
 @RestController
 public class DownloadController {
 
@@ -45,7 +45,7 @@ public class DownloadController {
         }
     }
 
-    @GetMapping("attachment")
+    @GetMapping("attachment123")
     // 导出学生作证材料
     public String exportAttachment(HttpServletResponse response) {
         try {
@@ -63,11 +63,15 @@ public class DownloadController {
 
         // 文件后缀
         String suffixName = filePath.substring(filePath.lastIndexOf("."));
+        //文件名
+        String fileName = filePath.substring(filePath.lastIndexOf("/")+1,filePath.lastIndexOf("."));
 
+//        获取这个路径下的文件
         FileSystemResource fileSystemResource = new FileSystemResource(filePath);
-        HttpHeaders headers = new HttpHeaders();
 
-        headers.add("Content-Disposition", "attachment;filename=" + "applier" + suffixName);
+//        设置返回的头部
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8") + suffixName);
         return ResponseEntity.ok()
                 .headers(headers)
                 .contentLength(fileSystemResource.contentLength())
@@ -89,8 +93,6 @@ public class DownloadController {
         //设置文件ContentType类型
         response.setContentType("image/" + suffixName);
 
-        //设置文件头：最后一个参数是设置下载文件名
-        //response.setHeader("Content-Disposition", "attachment;fileName="+fileName);
         ServletOutputStream out = response.getOutputStream();
 
         // 读取文件流
@@ -108,6 +110,8 @@ public class DownloadController {
 
 //        文件后缀
         String suffixName = filePath.substring(filePath.lastIndexOf("."));
+//        文件名
+        String fileName = filePath.substring(filePath.lastIndexOf("/")+1,filePath.lastIndexOf("."));
 
 //        服务器文件
         FileInputStream in = new FileInputStream(filePath);
@@ -118,11 +122,10 @@ public class DownloadController {
 
         response.setContentType("application/x-download");
 
-        String fileName = URLEncoder.encode("浏览器要显示的文件名", "UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         //设置文件头：最后一个参数是设置下载文件名
-        response.setHeader("Content-Disposition", "attachment;fileName="+"attachment"+suffixName);
+        response.setHeader("Content-Disposition", "attachment;fileName="+ URLEncoder.encode(fileName,"UTF-8") + suffixName);
         ServletOutputStream out = response.getOutputStream();
 
         // 读取文件流
