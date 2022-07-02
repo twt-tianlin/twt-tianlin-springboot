@@ -183,22 +183,53 @@ public class DownloadService {
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
             cell.setCellValue(confirm.getIdcard());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
-            cell.setCellValue(confirm.getIsJoin());
-            cell = ExportUtil.createCell(rowNumber,rowCursor++);
+
+            // 判断能否参加培训
+            if (confirm.getIsJoin()==1){
+                cell.setCellValue("是");
+                cell = ExportUtil.createCell(rowNumber,rowCursor++);
+            }else{
+                cell.setCellValue("否");
+                rowIndex++;
+                rowCursor=0;
+                continue;
+            }
+
+            // 是否需要卧具  如果是 插入后面的卧具
             cell.setCellValue(confirm.getBuy());
+            if (confirm.getBuy()==1){
+                cell.setCellValue("是");
+                cell = ExportUtil.createCell(rowNumber,rowCursor++);
+                cell.setCellValue(confirm.getBedNeed());
+
+            }else{
+                cell.setCellValue("否");
+                rowCursor++;
+
+            }
+
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
-            cell.setCellValue(confirm.getBedNeed());
+
+            // 判断是否需要接站
+            if (confirm.getIsNeedPickUp()==1){
+                cell.setCellValue("是");
+            }else{
+                cell.setCellValue("否");
+            }
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
-            cell.setCellValue(confirm.getIsNeedPickUp());
-            cell = ExportUtil.createCell(rowNumber,rowCursor++);
+
             cell.setCellValue(confirm.getWayToJin());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
+
             cell.setCellValue(confirm.getTimeToJin());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
+
             cell.setCellValue(confirm.getTrainNumber());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
+
             cell.setCellValue(confirm.getStation());
             cell = ExportUtil.createCell(rowNumber,rowCursor++);
+
             cell.setCellValue(confirm.getAccompanyNumber());
             rowIndex++;
             rowCursor=0;

@@ -18,23 +18,26 @@ import java.util.Date;
 @Component
 @ConfigurationProperties(prefix = "twt.jwt")
 public class JwtUtils {
-
+    // 密钥
     private String secret;
+    // 过期时间
     private long expire;
+    // 请求头
     private String header;
 
-    /**
-     * 生成jwt token
-     */
+
+    // 生成JWT
     public String generateToken(long userId) {
+
+        // 当前时间和过期时间
         Date nowDate = new Date();
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
 
         return Jwts.builder()
-                // 设置header
+                // 设置Header
                 .setHeaderParam("typ", "JWT")
-                // 设置主体
-                .setSubject(userId+"")
+                // 设置Body中的Subject
+                .setSubject(userId + "")
                 // 设置过期时间
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)
@@ -43,22 +46,20 @@ public class JwtUtils {
                 .compact();
     }
 
+    // 得到Token的Body部分
     public Claims getClaimByToken(String token) {
         try {
             return Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-        }catch (Exception e){
+        } catch (Exception e) {
             log.debug("validate is token error ", e);
             return null;
         }
     }
 
-    /**
-     * token是否过期
-     * @return  true：过期
-     */
+    // 验证Token是否过期
     public boolean isTokenExpired(Date expiration) {
         return expiration.before(new Date());
     }

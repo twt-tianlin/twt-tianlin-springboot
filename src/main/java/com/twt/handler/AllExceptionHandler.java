@@ -25,7 +25,7 @@ public class AllExceptionHandler {
         return Result.fail(404, e.getMessage(), null);
     }
 
-    // token过期
+    // Token过期
     @ExceptionHandler(ExpiredCredentialsException.class)
     public Result doExpiredCredentialException(Exception e) {
         e.printStackTrace();

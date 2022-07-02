@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 @Data
 public class AccountProfile implements Serializable {
+//    用户id
     private Integer id;
+//    学生姓名
     private String name;
 }

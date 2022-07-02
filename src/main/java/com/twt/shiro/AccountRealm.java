@@ -1,7 +1,6 @@
 package com.twt.shiro;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.system.UserInfo;
 import com.twt.entity.User;
 import com.twt.service.UserService;
 import com.twt.utils.JwtUtils;
@@ -26,11 +25,11 @@ public class AccountRealm extends AuthorizingRealm {
     // 支持的token
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof JwtToken;
+        return token instanceof JWTToken;
     }
 
 
-    // 获取权限信息
+    // 权限
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
@@ -41,11 +40,11 @@ public class AccountRealm extends AuthorizingRealm {
     }
 
 
-    // 传入token获得认证信息
+    // 认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        // 根据token查用户id  反查数据库
-        JwtToken jwtToken = (JwtToken) authenticationToken;
+        // 根据Token.Body.Subject中的uid 反查数据库
+        JWTToken jwtToken = (JWTToken) authenticationToken;
         String userId = jwtUtils.getClaimByToken((String) jwtToken.getPrincipal()).getSubject();
         User user = userService.getById(userId);
 
@@ -53,7 +52,7 @@ public class AccountRealm extends AuthorizingRealm {
             throw new UnknownAccountException("账户不存在");
         }
 
-        // 赋给shiro的用户对象
+        // 赋给Shiro的用户对象
         AccountProfile profile = new AccountProfile();
         BeanUtil.copyProperties(user,profile);
 
